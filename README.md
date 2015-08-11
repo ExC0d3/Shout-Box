@@ -1,5 +1,9 @@
 #Shout Box Node Js App
 
+Developing Shout Box App from Node In Action and listing 
+personal changes.
+
+
 ### Aim
 
 1. User Authentication Using Bcrypt
