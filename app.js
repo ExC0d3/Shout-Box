@@ -10,11 +10,13 @@ var register = require('./routes/register');
 var users = require('./routes/users');
 var messages = require('./lib/messages');
 var session = require('express-session');
+var login = require('./routes/login');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,9 +35,15 @@ app.use(messages);
 
 /**app.use('/', routes);
 app.use('/users', users);**/
+/** REGISTRATION ROUTES **/
 app.get('/register', register.form);
 app.post('/register', register.submit);
 
+//Login Routes
+
+app.get('/login', login.form);
+app.post('/login', login.submit);
+app.get('/logout', login.logout);
 
 app.listen(3000,function(err){
   if(err) throw err;
