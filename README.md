@@ -1,5 +1,9 @@
 #Shout Box Node Js App
 
+Developing Shout Box App from Node In Action and listing 
+personal changes.
+
+
 ### Aim
 
 1. User Authentication Using Bcrypt
@@ -24,7 +28,7 @@ app.use(session({
 
 ```
 
-2. User connect-busboy for parsing registration from and added custom methood to submit username
+2. Used connect-busboy for parsing registration from and added custom methood to submit username
 and password to redis
 
 
