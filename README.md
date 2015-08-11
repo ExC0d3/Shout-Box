@@ -23,3 +23,67 @@ app.use(session({
 }));
 
 ```
+
+2. User connect-busboy for parsing registration from and added custom methood to submit username
+and password to redis
+
+
+**sudo npm install connect-bustboy --save**
+
+*Inside app.js*
+
+```javascript
+var busboy = require('connect-busboy');
+.
+..
+....
+app.use(busboy()).
+
+```
+
+*Inside register.js route file*
+
+```javascript
+exports.submit = function(req,res,next){
+	
+	var username;
+	var pass;
+	req.pipe(req.busboy);
+	req.busboy.on('field', function(key,value){
+		if(key=='user[name]')
+		{
+			username=value
+		}
+		else if(key=='user[pass]')
+		{
+			pass=value
+		}
+	});
+
+	req.busboy.on('finish',function(){
+		console.log("Parsed Form");
+		console.log("UserName:"+username);
+		console.log("Password:"+pass);
+		User.getByName(username, function(err,user){
+		if(err) return next(err);
+
+		if(user.id){
+			res.error("Username already takes");
+			res.redirect('back');
+		} else {
+
+			user  = new User({
+				name: username,
+				pass: pass
+			});
+
+			user.save(function(err){
+				if(err) return next(err);
+				req.session.uid = user.id;
+				res.redirect('/');
+			});
+		}
+	});
+	});
+}
+```
