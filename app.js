@@ -2,12 +2,14 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+/**var cookieParser = require('cookie-parser');**/
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var register = require('./routes/register');
 var users = require('./routes/users');
-
+var messages = require('./lib/messages');
+var session = require('express-session');
 var app = express();
 
 // view engine setup
@@ -19,11 +21,22 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+/**app.use(cookieParser());**/
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session);
+app.use(messages);
 
-app.use('/', routes);
-app.use('/users', users);
+/**app.use('/', routes);
+app.use('/users', users);**/
+app.get('/register', register.form);
+app.post('/register', register.submit);
+
+
+app.listen(3000,function(err){
+  if(err) throw err;
+  console.log("Server started");
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
