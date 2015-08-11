@@ -23,7 +23,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 /**app.use(cookieParser());**/
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session);
+app.use(session({
+  secret: 'shoutBox',
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(messages);
 
 /**app.use('/', routes);
