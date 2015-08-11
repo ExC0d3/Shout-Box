@@ -24,7 +24,7 @@ app.use(session({
 
 ```
 
-2. User connect-busboy for parsing registration from and added custom methood to submit username
+2. Used connect-busboy for parsing registration from and added custom methood to submit username
 and password to redis
 
 
