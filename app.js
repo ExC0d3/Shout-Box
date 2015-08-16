@@ -12,6 +12,8 @@ var messages = require('./lib/messages');
 var session = require('express-session');
 var login = require('./routes/login');
 var app = express();
+var user = require('./lib/middleware/user');
+var entries = require('./routes/entries');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +23,7 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+
 /**app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());**/
@@ -31,6 +34,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use(user);
 app.use(messages);
 
 /**app.use('/', routes);
@@ -43,7 +47,10 @@ app.post('/register', register.submit);
 
 app.get('/login', login.form);
 app.post('/login', login.submit);
-/**app.get('/logout', login.logout);**/
+app.get('/logout', login.logout);
+
+//Entry routes
+app.get('/', entries.list);
 
 app.listen(3000,function(err){
   if(err) throw err;
