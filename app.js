@@ -14,7 +14,9 @@ var login = require('./routes/login');
 var app = express();
 var user = require('./lib/middleware/user');
 var entries = require('./routes/entries');
-var validate = require('./lib/middleware/validate')
+var validate = require('./lib/middleware/validate');
+var page = require('./lib/middleware/page');
+var Entry = require('./lib/entry');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,7 +43,7 @@ app.use(messages);
 app.use('/users', users);**/
 
 //Entry routes
-app.get('/', entries.list);
+app.get('/', page(Entry.count,5), entries.list);
 app.post('/post',
 validate.required('entry[title]'),
 validate.lengthAbove('entry[title]',entries.submit));
