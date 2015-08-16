@@ -44,7 +44,7 @@ app.use('/users', users);**/
 app.get('/', entries.list);
 app.post('/post',
 validate.required('entry[title]'),
-validate.lengthAbove('entry[title]',entries.submit);
+validate.lengthAbove('entry[title]',entries.submit));
 
 
 /** REGISTRATION ROUTES **/
