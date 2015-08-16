@@ -93,7 +93,8 @@ exports.submit = function(req,res,next){
 ```
 
 3. Use busboy-connect to for login logic
-	inside login.js add
+
+*inside login.js add*
 
 ```javascript
 	
