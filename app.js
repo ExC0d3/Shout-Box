@@ -43,7 +43,7 @@ app.post('/register', register.submit);
 
 app.get('/login', login.form);
 app.post('/login', login.submit);
-app.get('/logout', login.logout);
+/**app.get('/logout', login.logout);**/
 
 app.listen(3000,function(err){
   if(err) throw err;
