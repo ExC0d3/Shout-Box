@@ -39,6 +39,10 @@ app.use(messages);
 
 /**app.use('/', routes);
 app.use('/users', users);**/
+
+//Entry routes
+app.get('/', entries.list);
+
 /** REGISTRATION ROUTES **/
 app.get('/register', register.form);
 app.post('/register', register.submit);
@@ -49,8 +53,7 @@ app.get('/login', login.form);
 app.post('/login', login.submit);
 app.get('/logout', login.logout);
 
-//Entry routes
-app.get('/', entries.list);
+
 
 app.listen(3000,function(err){
   if(err) throw err;
